@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Task Form to add Department Fields -->
+    <record id="view_task_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="department_id" options="{'no_create': True, 'no_open': True}"/>
+                <field name="responsible_id" options="{'no_create': True}" context="{'default_department_id': department_id}"/>
+            </field>
+            
+            <field name="date_deadline" position="before">
+                <field name="date_start"/>
+                <field name="date_end"/>
+            </field>
+            
+            <notebook position="inside">
+                <page string="Dependencies" name="dependencies">
+                    <group>
+                        <field name="dependency_ids" widget="many2many_tags" domain="[('project_id', '=', project_id), ('id', '!=', id)]"/>
+                    </group>
+                    <separator string="Dependent Tasks"/>
+                    <field name="dependent_task_ids" readonly="1"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+    
+    <!-- Inherit Task Tree/List View -->
+    <record id="view_task_tree_inherit" model="ir.ui.view">
+        <field name="name">project.task.tree.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="department_id"/>
+                <field name="responsible_id"/>
+            </field>
+        </field>
+    </record>
+
+        <!-- Inherit Task Search View -->
+    <record id="view_task_search_inherit" model="ir.ui.view">
+        <field name="name">project.task.search.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_search_form"/>
+        <field name="arch" type="xml">
+            <filter name="stage" position="after">
+                <filter string="Department" name="department" context="{'group_by':'department_id'}"/>
+                <filter string="Responsible Member" name="responsible" context="{'group_by':'responsible_id'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

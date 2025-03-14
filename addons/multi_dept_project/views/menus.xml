@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_multi_dept_project_root" 
+              name="Multi-Department Projects" 
+              web_icon="multi_dept_project,static/description/icon.png"
+              sequence="90"/>
+    
+    <!-- Projects Submenu -->
+    <menuitem id="menu_multi_dept_projects"
+              name="Projects"
+              parent="menu_multi_dept_project_root"
+              action="project.action_view_all_task"
+              sequence="10"/>
+    
+    <!-- Departments Submenu -->
+    <menuitem id="menu_departments"
+              name="Departments"
+              parent="menu_multi_dept_project_root"
+              action="action_project_department"
+              sequence="20"/>
+    
+    <!-- Department Members Submenu -->
+    <menuitem id="menu_department_members"
+              name="Department Members"
+              parent="menu_multi_dept_project_root"
+              action="action_project_department_member"
+              sequence="30"/>
+</odoo>

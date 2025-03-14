@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Department Form View -->
+    <record id="view_project_department_form" model="ir.ui.view">
+        <field name="name">project.department.form</field>
+        <field name="model">project.department</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_tasks" type="object" class="oe_stat_button" icon="fa-tasks">
+                            <field name="total_tasks" string="Tasks" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Department Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="manager_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="total_members"/>
+                            <field name="completed_tasks"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" placeholder="Department Description..."/>
+                        </page>
+                        <page string="Members" name="members">
+                            <field name="member_ids">
+                                <list editable="bottom">
+                                    <field name="user_id"/>
+                                    <field name="role"/>
+                                    <field name="join_date"/>
+                                    <field name="assigned_tasks"/>
+                                    <field name="completed_tasks"/>
+                                    <field name="overdue_tasks"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Projects" name="projects">
+                            <field name="project_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="partner_id"/>
+                                    <field name="date_start"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Department Tree/List View -->
+    <record id="view_project_department_list" model="ir.ui.view">
+        <field name="name">project.department.list</field>
+        <field name="model">project.department</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="manager_id"/>
+                <field name="total_members"/>
+                <field name="total_tasks"/>
+                <field name="completed_tasks"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- Department Action -->
+    <record id="action_project_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">project.department</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first department!
+            </p>
+            <p>
+                Organize your projects by departments to better track progress and performance.
+            </p>
+        </field>
+    </record>
+</odoo>
