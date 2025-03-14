@@ -1,32 +1,66 @@
-[![Build Status](https://runbot.odoo.com/runbot/badge/flat/1/master.svg)](https://runbot.odoo.com/runbot)
-[![Tech Doc](https://img.shields.io/badge/master-docs-875A7B.svg?style=flat&colorA=8F8F8F)](https://www.odoo.com/documentation/master)
-[![Help](https://img.shields.io/badge/master-help-875A7B.svg?style=flat&colorA=8F8F8F)](https://www.odoo.com/forum/help-1)
-[![Nightly Builds](https://img.shields.io/badge/master-nightly-875A7B.svg?style=flat&colorA=8F8F8F)](https://nightly.odoo.com/)
+# Panduan Instalasi Odoo 18
+Ikuti langkah-langkah berikut untuk mengatur aplikasi secara lokal di komputer atau laptop Anda.
 
-Odoo
-----
+## Prasyarat
+* [Git](https://git-scm.com/)
+* [Python](https://www.python.org/) (v3.10 ke atas)
+* [PostgresSQL](https://www.postgresql.org/) (v14 ke atas)
+* [wkhtmltopdf](https://wkhtmltopdf.org/docs.html)
 
-Odoo is a suite of web based open source business apps.
+## Instalasi
+1. **Clone Repository**  
+   Clone repository proyek dari GitHub melalui terminal. Anda dapat memilih menggunakan tautan `HTTP` atau `SSH` dengan perintah berikut:
+   ```bash
+   git clone git@github.com:bip-itteam-internal/learn-odoo.git
+   ```
 
-The main Odoo Apps include an <a href="https://www.odoo.com/page/crm">Open Source CRM</a>,
-<a href="https://www.odoo.com/app/website">Website Builder</a>,
-<a href="https://www.odoo.com/app/ecommerce">eCommerce</a>,
-<a href="https://www.odoo.com/app/inventory">Warehouse Management</a>,
-<a href="https://www.odoo.com/app/project">Project Management</a>,
-<a href="https://www.odoo.com/app/accounting">Billing &amp; Accounting</a>,
-<a href="https://www.odoo.com/app/point-of-sale-shop">Point of Sale</a>,
-<a href="https://www.odoo.com/app/employees">Human Resources</a>,
-<a href="https://www.odoo.com/app/social-marketing">Marketing</a>,
-<a href="https://www.odoo.com/app/manufacturing">Manufacturing</a>,
-<a href="https://www.odoo.com/">...</a>
+2. **Masuk ke Direktori Proyek**  
+   Pindah ke direktori proyek yang baru saja di-clone:
+   ```bash
+   cd learn-odoo
+   ```
 
-Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get
-a full-featured <a href="https://www.odoo.com">Open Source ERP</a> when you install several Apps.
+3. **Membuat Environment**  
+   Sebelum menginstal library yang dibutuhkan, sebaiknya membuat environment terpisah dari environment global supaya tidak bentrok. Untuk membuatnya, gunakan perintah berikut:
+   ```bash
+   python -m venv .env
+   ```
 
-Getting started with Odoo
--------------------------
+4. **Aktifkan Environment**  
+   Untuk mengaktifkan environment yang telah dibuat, gunakan perintah berikut:
+   ```bash
+   .env/Scripts/activate
+   ```
+   Sedangkan untuk menonaktifkan environment, cukup ketik perintah berikut di terminal:
+   ```bash
+   deactivate
+   ```
 
-For a standard installation please follow the <a href="https://www.odoo.com/documentation/master/administration/install/install.html">Setup instructions</a>
-from the documentation.
+5. **Install Library**  
+   Setelah berhasil membuat environment, jalankan perintah berikut untuk menginstal semua library yang dibutuhkan oleh aplikasi:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-To learn the software, we recommend the <a href="https://www.odoo.com/slides">Odoo eLearning</a>, or <a href="https://www.odoo.com/page/scale-up-business-game">Scale-up</a>, the <a href="https://www.odoo.com/page/scale-up-business-game">business game</a>. Developers can start with <a href="https://www.odoo.com/documentation/master/developer/howtos.html">the developer tutorials</a>
+6. ****
+
+6. **Menjalankan Proyek**  
+   Untuk menjalankan odoo, cukup gunakan perintah berikut:
+   ```bash
+   python odoo-bin -c odoo.conf
+   ```
+
+7. **Buka Browser**  
+   Gunakan browser kesayangan Anda untuk menjalankan sistem ini, kemudian buka tautan berikut:
+   ```bash
+   http://localhost:8022
+   ```
+
+   ----
+   
+# Catatan Kekurangan Odoo
+
+## Modul Poryek
+* Lorem Ipsum
+* Lorem Ipsum
+* Lorem Ipsum
