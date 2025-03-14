@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem 
+        id="menu_custom_notes_root" 
+        name="Custom Notes" 
+        sequence="10"/>
+    
+    <!-- Sub Menu -->
+    <menuitem 
+        id="menu_custom_notes" 
+        name="Notes" 
+        parent="menu_custom_notes_root" 
+        action="action_custom_notes" 
+        sequence="1"/>
+</odoo>

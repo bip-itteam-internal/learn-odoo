@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View -->
+    <record id="view_custom_notes_tree" model="ir.ui.view">
+        <field name="name">custom.notes.tree</field>
+        <field name="model">custom.notes</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_custom_notes_form" model="ir.ui.view">
+        <field name="name">custom.notes.form</field>
+        <field name="model">custom.notes</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                    </group>
+                    <notebook>
+                        <page string="Content">
+                            <field name="content" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_custom_notes_search" model="ir.ui.view">
+        <field name="name">custom.notes.search</field>
+        <field name="model">custom.notes</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="date"/>
+                <filter string="Today" name="today" domain="[('date','=',context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Date" name="group_by_date" context="{'group_by':'date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_custom_notes" model="ir.actions.act_window">
+        <field name="name">Notes</field>
+        <field name="res_model">custom.notes</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Buat catatan pertama Anda
+            </p>
+        </field>
+    </record>
+</odoo>

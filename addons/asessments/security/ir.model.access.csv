@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_assessment_assessment_user,assessment.assessment.user,model_assessment_assessment,base.group_user,1,0,0,0
+access_assessment_assessment_manager,assessment.assessment.manager,model_assessment_assessment,base.group_system,1,1,1,1
