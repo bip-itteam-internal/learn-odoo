@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Project Monitoring Dashboard View -->
+    <record id="view_project_monitoring_dashboard" model="ir.ui.view">
+        <field name="name">project.monitoring.dashboard</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <sheet>
+                    <div class="oe_title mb-3">
+                        <h1>Project Monitoring Dashboard</h1>
+                        <h2><field name="name" readonly="1"/></h2>
+                    </div>
+                    
+                    <!-- Filter Controls -->
+                    <div class="o_cp_searchview mb-3" style="border-bottom: 1px solid #dee2e6; padding-bottom: 10px;">
+                        <div class="btn-group" role="group">
+                            <button name="action_refresh_dashboard" type="object" string="Refresh" class="btn btn-secondary"/>
+                            <button name="action_view_bottlenecks" type="object" string="View Bottlenecks" class="btn btn-warning"/>
+                            <button name="action_analyze_tasks" type="object" string="Analyze Tasks" class="btn btn-info"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Dashboard Stats Cards -->
+                    <div class="row mb-3">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Overall Progress</h5>
+                                    <field name="task_progress" widget="percentpie"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">On-time Completion</h5>
+                                    <field name="on_time_completion_rate" widget="percentpie"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Bottleneck Tasks</h5>
+                                    <field name="bottleneck_count" widget="statinfo"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Departments Involved</h5>
+                                    <field name="department_count" widget="statinfo"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress by Department Chart -->
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Department Progress</h5>
+                                </div>
+                                <div class="card-body">
+                                    <field name="department_progress_chart" widget="department_progress_chart"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottlenecks and Critical Path -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Identified Bottlenecks</h5>
+                                </div>
+                                <div class="card-body" style="max-height: 300px; overflow: auto;">
+                                    <field name="bottleneck_task_ids">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="department_id"/>
+                                            <field name="responsible_id"/>
+                                            <field name="delay_days" decoration-danger="delay_days > 0"/>
+                                            <field name="priority_score" decoration-danger="priority_score > 10"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Department Performance</h5>
+                                </div>
+                                <div class="card-body" style="max-height: 300px; overflow: auto;">
+                                    <field name="department_performance">
+                                        <list>
+                                            <field name="department_id"/>
+                                            <field name="task_count"/>
+                                            <field name="on_time_rate" widget="percentage"/>
+                                            <field name="bottleneck_count" decoration-danger="bottleneck_count > 0"/>
+                                            <field name="avg_delay" decoration-danger="avg_delay > 2"/>
+                                        </list>
+                                    </field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Project Monitoring Dashboard Action -->
+    <record id="action_project_monitoring_dashboard" model="ir.actions.act_window">
+        <field name="name">Project Monitoring</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_project_monitoring_dashboard"/>
+        <field name="target">main</field>
+        <field name="context">{'form_view_initial_mode': 'view'}</field>
+        <field name="domain">[('is_multi_department', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No multi-department projects found.
+            </p>
+            <p>
+                Create a project and mark it as multi-department to monitor it here.
+            </p>
+        </field>
+    </record>
+</odoo>
